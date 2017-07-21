@@ -12,7 +12,8 @@
     "koa": "^2.3.0",
     "koa-body": "^2.3.0",
     "koa-router": "^7.2.1",
-    "mongodb": "^2.2.30"
+    "mongodb": "^2.2.30",
+    "mongoose": "^4.11.3"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
