@@ -19,3 +19,10 @@ open http://localhost:3000
 1. How to use mongoose?
 
 1. How to use Get/Post/Put/Delete?
+
+1. How to config eslint
+
+```bash
+npm install -g eslint
+eslint --init
+```
