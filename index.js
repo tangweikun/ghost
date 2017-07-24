@@ -2,6 +2,7 @@ import Koa from 'koa'
 import Router from 'koa-router'
 import koaBody from 'koa-body'
 import mongoose from 'mongoose'
+import cors from 'koa-cors'
 
 import PropertyModel from './models/property'
 import SOAPModel from './models/soap'
@@ -13,6 +14,7 @@ mongoose.connect(process.env.MONGO_URL)
 const app = new Koa()
 const router = new Router()
 app.use(koaBody())
+app.use(cors())
 
 router
   .get('/', (ctx) => {
@@ -24,8 +26,6 @@ router
       const d = per.toObject()
       console.log('======dd', d, d.username)
     })
-    // console.log(a, '---')
-    // getDataFromMongo().then(result => console.log('=====', result.length))
     ctx.body = 'Hello World!'
   })
   .get('/t', (ctx) => {
@@ -35,12 +35,12 @@ router
     console.log('----', JSON.parse(JSON.stringify(ctx.request.body)), ctx.request, ctx.request.url)
     console.log(ctx.state, '====', ctx.request.querystring)
     ctx.body = `Request Body: ${JSON.parse(JSON.stringify(ctx.request.body))}`
-    // console.log('=======', ctx.state)
+    ctx.body = 'hhhh'
   })
 
 app
   .use(router.routes())
-  // .use(router.allowedMethods());
+  // .use(router.allowedMethods())
 
 app.listen(4000)
 console.log('[demo] start-quick is starting at port 4000')
