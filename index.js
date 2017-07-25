@@ -32,15 +32,21 @@ router
     ctx.body = 'twk'
   })
   .post('/r', (ctx) => {
-    console.log('----', JSON.parse(JSON.stringify(ctx.request.body)), ctx.request, ctx.request.url)
-    console.log(ctx.state, '====', ctx.request.querystring)
+    console.log(
+      '----',
+      JSON.parse(JSON.stringify(ctx.request.body)),
+      ctx.request,
+      ctx.request.url,
+    )
+    console.log(ctx.body, '====', JSON.stringify(ctx.request.body))
+    const property = JSON.parse(JSON.stringify(ctx.request.body))
+    const m = new PropertyModel(property)
+    m.save(property)
     ctx.body = `Request Body: ${JSON.parse(JSON.stringify(ctx.request.body))}`
-    ctx.body = 'hhhh'
   })
 
-app
-  .use(router.routes())
-  // .use(router.allowedMethods())
+app.use(router.routes())
+// .use(router.allowedMethods())
 
 app.listen(4000)
 console.log('[demo] start-quick is starting at port 4000')
