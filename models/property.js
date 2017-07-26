@@ -6,7 +6,7 @@ const PropertySchema = new Schema({
   createdAt: Date,
   date: Date,
   income: Number,
-  outcome: Number,
+  outlay: Number,
 })
 
 const PropertyModel = mongoose.model('properties', PropertySchema)

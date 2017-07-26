@@ -28,13 +28,21 @@ router
     })
     ctx.body = 'Hello World!'
   })
-  .get('/t', (ctx) => {
-    ctx.body = 'twk'
+  .get('/findProperty', async (ctx) => {
+    await PropertyModel.find()
+      .sort({ date: -1 })
+      .limit(100)
+      .exec((err, properties) => {
+        if (err) {
+          console.log(err)
+        } else {
+          ctx.body = properties
+        }
+      })
   })
   .post('/insertProperty', (ctx) => {
     const { date, income, outcome } = ctx.request.body
-    const Property = new PropertyModel({ date, income, outcome })
-    Property.save()
+    PropertyModel({ date, income, outcome }).save()
     ctx.body = `Request Body: ${JSON.stringify(ctx.request.body)}`
   })
 
