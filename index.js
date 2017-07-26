@@ -41,8 +41,8 @@ router
       })
   })
   .post('/insertProperty', (ctx) => {
-    const { date, income, outcome } = ctx.request.body
-    PropertyModel({ date, income, outcome }).save()
+    const { date, income, outlay } = ctx.request.body
+    PropertyModel({ date, income, outlay }).save()
     ctx.body = `Request Body: ${JSON.stringify(ctx.request.body)}`
   })
 
