@@ -6,9 +6,9 @@ const PropertySchema = new Schema({
   createdAt: Date,
   date: Date,
   income: Number,
-  outlay: Number,
+  outcome: Number,
 })
 
-const PropertyModel = mongoose.model('property', PropertySchema)
+const PropertyModel = mongoose.model('properties', PropertySchema)
 
 export default PropertyModel

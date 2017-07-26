@@ -31,18 +31,11 @@ router
   .get('/t', (ctx) => {
     ctx.body = 'twk'
   })
-  .post('/r', (ctx) => {
-    console.log(
-      '----',
-      JSON.parse(JSON.stringify(ctx.request.body)),
-      ctx.request,
-      ctx.request.url,
-    )
-    console.log(ctx.body, '====', JSON.stringify(ctx.request.body))
-    const property = JSON.parse(JSON.stringify(ctx.request.body))
-    const m = new PropertyModel(property)
-    m.save(property)
-    ctx.body = `Request Body: ${JSON.parse(JSON.stringify(ctx.request.body))}`
+  .post('/insertProperty', (ctx) => {
+    const { date, income, outcome } = ctx.request.body
+    const Property = new PropertyModel({ date, income, outcome })
+    Property.save()
+    ctx.body = `Request Body: ${JSON.stringify(ctx.request.body)}`
   })
 
 app.use(router.routes())
