@@ -5,7 +5,7 @@
 ```bash
 git clone https://github.com/tangweikun/ghost && cd ghost && yarn
 yarn start
-open http://localhost:3000
+open http://localhost:4000
 ```
 
 ## Intention
