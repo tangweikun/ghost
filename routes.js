@@ -1,14 +1,12 @@
-const home = require('./controllers/home')
-const task = require('./controllers/task')
+import Router from 'koa-router'
 
-module.exports = function routes(app) {
-  app.get('/', home)
+import { findProperty, insertProperty, insertTask } from './controllers'
 
-  // restful task API
-  app.post('/tasks/clear', task.clear)
-  app.post('/tasks/complete', task.complete)
-  app.get('/tasks', task.list)
-  app.post('/tasks', task.add)
-  app.put('/tasks/:id', task.update)
-  app.del('/tasks/:id', task.destroy)
-}
+const router = new Router()
+
+router
+  .get('/findProperty', findProperty)
+  .post('/insertProperty', insertProperty)
+  .post('/insertTask', insertTask)
+
+export default router
