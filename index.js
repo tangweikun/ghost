@@ -4,9 +4,8 @@ import koaBody from 'koa-body'
 import mongoose from 'mongoose'
 import cors from 'koa-cors'
 
-import PropertyModel from './models/property'
 import SOAPModel from './models/soap'
-import TodoListModel from './models/todoList'
+import { findProperty, insertProperty, insertTask } from './controllers'
 
 require('dotenv').config()
 
@@ -16,7 +15,6 @@ const app = new Koa()
 const router = new Router()
 app.use(koaBody())
 app.use(cors())
-const createdAt = new Date()
 
 router
   .get('/', (ctx) => {
@@ -30,33 +28,9 @@ router
     })
     ctx.body = 'Hello World!'
   })
-  .get('/findProperty', async (ctx) => {
-    await PropertyModel.find()
-      .sort({ date: -1 })
-      .limit(100)
-      .exec((err, properties) => {
-        if (err) {
-          console.log(err)
-        } else {
-          ctx.body = properties
-        }
-      })
-  })
-  .post('/insertProperty', (ctx) => {
-    const { date, income, outlay } = ctx.request.body
-    PropertyModel({ date, income, outlay, createdAt }).save()
-    ctx.body = `Request Body: ${JSON.stringify(ctx.request.body)}`
-  })
-  .post('/insertTask', (ctx) => {
-    const { task } = ctx.request.body
-    TodoListModel({
-      task,
-      isDelete: false,
-      isCompleted: false,
-      createdAt,
-    }).save()
-    ctx.body = `Request Body: ${JSON.stringify(ctx.request.body)}`
-  })
+  .get('/findProperty', findProperty)
+  .post('/insertProperty', insertProperty)
+  .post('/insertTask', insertTask)
 
 app.use(router.routes())
 // .use(router.allowedMethods())
