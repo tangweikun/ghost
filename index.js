@@ -5,6 +5,7 @@ import cors from 'koa-cors'
 // import io from 'socket.io'
 
 import router from './routes'
+import TodoListModel from './models/todoList'
 
 require('dotenv').config()
 
@@ -33,10 +34,20 @@ const io = require('socket.io')(server, {
 io.set('transports', ['websocket'])
 
 io.on('connection', (socket) => {
-  socket.on('chat message', (msg) => {
-    console.log(msg, '---->>>')
-    socket.emit('chat message', msg)
+  socket.on('chat message', async (msg) => {
+    await TodoListModel.find()
+      .sort({ createdAt: -1 })
+      .limit(100)
+      .exec((err, tasks) => {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log(msg, '---->>>')
+          socket.emit('chat message', tasks)
+        }
+      })
   })
+
   socket.emit('ww', 'rrr')
   socket.on('he', msg => console.log(msg, '==='))
 })
