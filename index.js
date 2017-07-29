@@ -6,6 +6,7 @@ import cors from 'koa-cors'
 
 import PropertyModel from './models/property'
 import SOAPModel from './models/soap'
+import TodoListModel from './models/todoList'
 
 require('dotenv').config()
 
@@ -15,6 +16,7 @@ const app = new Koa()
 const router = new Router()
 app.use(koaBody())
 app.use(cors())
+const createdAt = new Date()
 
 router
   .get('/', (ctx) => {
@@ -42,7 +44,17 @@ router
   })
   .post('/insertProperty', (ctx) => {
     const { date, income, outlay } = ctx.request.body
-    PropertyModel({ date, income, outlay }).save()
+    PropertyModel({ date, income, outlay, createdAt }).save()
+    ctx.body = `Request Body: ${JSON.stringify(ctx.request.body)}`
+  })
+  .post('/insertTask', (ctx) => {
+    const { task } = ctx.request.body
+    TodoListModel({
+      task,
+      isDelete: false,
+      isCompleted: false,
+      createdAt,
+    }).save()
     ctx.body = `Request Body: ${JSON.stringify(ctx.request.body)}`
   })
 
