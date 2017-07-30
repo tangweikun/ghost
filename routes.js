@@ -5,6 +5,7 @@ import {
   insertProperty,
   insertTask,
   findTasks,
+  updateTask,
 } from './controllers'
 
 const router = new Router()
@@ -14,5 +15,6 @@ router
   .post('/property', insertProperty)
   .post('/task', insertTask)
   .get('/tasks', findTasks)
+  .post('/task/update', updateTask)
 
 export default router

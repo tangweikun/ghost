@@ -23,3 +23,31 @@ export async function findTasks(ctx) {
       }
     })
 }
+
+// await smsModel.findByIdAndUpdate(newSms._id, {
+//     $set: {
+//       error_response
+//     }
+//   })
+
+export async function updateTask(ctx) {
+  const { id, isCompleted } = ctx.request.body
+  await TodoListModel.findOneAndUpdate({ _id: id }, { $set: { isCompleted } })
+  ctx.body = 'TODO'
+
+  // await TodoListModel.findOneAndRemove({ _id })
+
+  // TodoListModel.findById(_id, (err, doc) => {
+  //   if (err) console.log(err)
+  //   console.log('---->>>', doc)
+  // })
+  // TodoListModel.update({ task: 'qqqqq' }, { $set: { task: '000' } })
+  // TodoListModel.update(
+  //   { _id },
+  //   {
+  //     $set: {
+  //       isCompleted: true,
+  //     },
+  //   },
+  // )
+}
