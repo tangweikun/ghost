@@ -17,6 +17,6 @@ router
   .post('/task', insertTask)
   .get('/tasks', findTasks)
   .post('/task/update', updateTask)
-  .post('/delete', deleteTask)
+  .post('/task/delete', deleteTask)
 
 export default router
