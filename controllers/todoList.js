@@ -24,11 +24,11 @@ export async function findTasks(ctx) {
     })
 }
 
-// await smsModel.findByIdAndUpdate(newSms._id, {
-//     $set: {
-//       error_response
-//     }
-//   })
+export async function deleteTask(ctx) {
+  const { _id } = ctx.request.body
+  await TodoListModel.findOneAndRemove({ _id })
+  ctx.body = 'TODO'
+}
 
 export async function updateTask(ctx) {
   const { _id, isCompleted } = ctx.request.body

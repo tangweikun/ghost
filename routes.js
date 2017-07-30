@@ -6,6 +6,7 @@ import {
   insertTask,
   findTasks,
   updateTask,
+  deleteTask,
 } from './controllers'
 
 const router = new Router()
@@ -16,5 +17,6 @@ router
   .post('/task', insertTask)
   .get('/tasks', findTasks)
   .post('/task/update', updateTask)
+  .post('/delete', deleteTask)
 
 export default router
