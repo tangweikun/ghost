@@ -26,8 +26,9 @@ export async function findTasks(ctx) {
 
 export async function deleteTask(ctx) {
   const { _id } = ctx.request.body
-  await TodoListModel.findOneAndRemove({ _id })
+  await TodoListModel.findOneAndUpdate({ _id }, { $set: { isDeleted: true } })
   ctx.body = 'TODO'
+  // await TodoListModel.findOneAndRemove({ _id })
 }
 
 export async function updateTask(ctx) {
