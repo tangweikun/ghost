@@ -7,13 +7,14 @@ export function insertTask(ctx) {
     isDeleted: false,
     isCompleted: false,
     createdAt: new Date(),
+    updatedAt: new Date(),
   }).save()
   ctx.body = `Request Body: ${JSON.stringify(ctx.request.body)}`
 }
 
 export async function findTasks(ctx) {
   await TodoListModel.find()
-    .sort({ createdAt: -1 })
+    .sort({ updatedAt: -1 })
     .limit(100)
     .exec((err, tasks) => {
       if (err) {
@@ -26,14 +27,20 @@ export async function findTasks(ctx) {
 
 export async function deleteTask(ctx) {
   const { _id } = ctx.request.body
-  await TodoListModel.findOneAndUpdate({ _id }, { $set: { isDeleted: true } })
+  await TodoListModel.findOneAndUpdate(
+    { _id },
+    { $set: { isDeleted: true, updatedAt: new Date() } },
+  )
   ctx.body = 'TODO'
   // await TodoListModel.findOneAndRemove({ _id })
 }
 
 export async function updateTask(ctx) {
   const { _id, isCompleted } = ctx.request.body
-  await TodoListModel.findOneAndUpdate({ _id }, { $set: { isCompleted } })
+  await TodoListModel.findOneAndUpdate(
+    { _id },
+    { $set: { isCompleted, updatedAt: new Date() } },
+  )
   ctx.body = 'TODO'
 
   // await TodoListModel.findOneAndRemove({ _id })
