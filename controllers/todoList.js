@@ -4,7 +4,7 @@ export function insertTask(ctx) {
   const { task } = ctx.request.body
   TodoListModel({
     task,
-    isDelete: false,
+    isDeleted: false,
     isCompleted: false,
     createdAt: new Date(),
   }).save()

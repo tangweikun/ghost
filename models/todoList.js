@@ -6,7 +6,7 @@ const TodoListSchema = new Schema({
   createdAt: Date,
   updatedAt: Date,
   task: String,
-  isDelete: Boolean,
+  isDeleted: Boolean,
   isCompleted: Boolean,
 })
 
