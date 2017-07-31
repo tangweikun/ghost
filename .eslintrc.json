@@ -8,6 +8,7 @@
   "rules": {
     "complexity": ["warn", 5],
     "semi": ["error", "never"],
+    "import/extensions": ["error", "never"],
     "no-console": 0
   }
 }
