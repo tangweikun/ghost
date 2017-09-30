@@ -21,5 +21,5 @@ router
   .post('/task/update', updateTask)
   .post('/task/delete', deleteTask)
   .get('/typing', findTyping)
-  .post('typing/insert', insertTask)
+  .post('typing', insertTask)
 export default router
