@@ -7,6 +7,8 @@ import {
   findTasks,
   updateTask,
   deleteTask,
+  findTyping,
+  insertTyping,
 } from './controllers'
 
 const router = new Router()
@@ -18,5 +20,6 @@ router
   .get('/tasks', findTasks)
   .post('/task/update', updateTask)
   .post('/task/delete', deleteTask)
-
+  .get('/typing', findTyping)
+  .post('typing/insert', insertTask)
 export default router
