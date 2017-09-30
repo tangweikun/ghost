@@ -1,4 +1,4 @@
-import TypingModel from '../models/Typing'
+import TypingModel from '../models/typing'
 
 export async function findTyping(ctx) {
   await TypingModel.find()
