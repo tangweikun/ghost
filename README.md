@@ -1,5 +1,7 @@
 # ghost
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/tangweikun/ghost.svg)](https://greenkeeper.io/)
+
 ## Getting Started
 
 ```bash
