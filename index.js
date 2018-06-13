@@ -48,3 +48,7 @@ app.get('/', function(request, response) {
     })
   })
 })
+
+app.get('/foo', function (request, response) {
+  response.send('foo')
+})
