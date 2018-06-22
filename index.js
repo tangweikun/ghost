@@ -6,8 +6,10 @@ import router from './routes'
 
 require('dotenv').config()
 
-// mongoose.connect(process.env.MONGO_URL)
-mongoose.connect('mongodb://twk:twk@ds115738.mlab.com:15738/twk')
+mongoose.connect(
+  process.env.MONGO_URL,
+  { useMongoClient: true },
+)
 
 const app = new Koa()
 

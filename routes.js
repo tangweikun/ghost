@@ -9,6 +9,7 @@ import {
   deleteTask,
   findTyping,
   insertTyping,
+  createUser,
 } from './controllers'
 
 const router = new Router()
@@ -22,4 +23,5 @@ router
   .post('/task/delete', deleteTask)
   .get('/typing', findTyping)
   .post('typing', insertTyping)
+  .post('/createUser', createUser)
 export default router
