@@ -2,7 +2,7 @@ import superagent from 'superagent'
 import WXUsersModel from '../models/wx-users'
 
 export async function getUserInfo(ctx) {
-  const { openid } = ctx.body
+  const { openid } = ctx.request.body
   await WXUsersModel.findOne({ openid }).exec((err, result) => {
     if (err) {
       console.log(err)
@@ -15,11 +15,13 @@ export async function getUserInfo(ctx) {
 export async function increaseAnswersCount(ctx) {
   // const openid = 'osIEm0dHDbWYVr-AmTSm1qq2s2FA'
   const { openid, isCorrect } = ctx.request.body
+  console.log('---->', openid, isCorrect)
+
   await WXUsersModel.findOneAndUpdate(
     { openid },
     { $inc: { totalOfAnswers: 1, totalOfCorrectAnswers: isCorrect ? 1 : 0 } },
   )
-  ctx.body = {}
+  ctx.body = { openid }
 }
 
 export async function createUser(ctx) {
