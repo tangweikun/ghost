@@ -13,15 +13,18 @@ export async function getUserInfo(ctx) {
 }
 
 export async function increaseAnswersCount(ctx) {
-  // const openid = 'osIEm0dHDbWYVr-AmTSm1qq2s2FA'
   const { openid, isCorrect } = ctx.request.body
-  console.log('---->', openid, isCorrect)
 
   await WXUsersModel.findOneAndUpdate(
     { openid },
     { $inc: { totalOfAnswers: 1, totalOfCorrectAnswers: isCorrect ? 1 : 0 } },
-  )
-  ctx.body = { openid }
+  ).exec((err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      ctx.body = result
+    }
+  })
 }
 
 export async function createUser(ctx) {
@@ -36,21 +39,28 @@ export async function createUser(ctx) {
   const { openid, session_key } = JSON.parse(res.text)
 
   if (openid) {
-    WXUsersModel.findOne({ openid }).exec(function(err, result) {
+    await WXUsersModel.findOne({ openid }).exec(function(err, result) {
       if (err) {
+        ctx.body = {}
         console.log(err)
       } else if (result) {
-        // console.log('update me')
+        ctx.body = result
       } else {
         WXUsersModel({
           createdAt: new Date(),
           updatedAt: new Date(),
+          totalOfCorrectAnswers: 0,
+          totalOfAnswers: 0,
           userInfo,
           openid,
         }).save()
+        ctx.body = {
+          openid,
+          userInfo,
+          totalOfCorrectAnswers: 0,
+          totalOfAnswers: 0,
+        }
       }
     })
   }
-
-  ctx.body = { openid }
 }
