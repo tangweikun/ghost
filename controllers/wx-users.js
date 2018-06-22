@@ -14,7 +14,7 @@ export async function getUserInfo(ctx) {
 
 export async function increaseAnswersCount(ctx) {
   const { openid, isCorrect } = ctx.request.body
-
+  console.log('==', openid)
   await WXUsersModel.findOneAndUpdate(
     { openid },
     { $inc: { totalOfAnswers: 1, totalOfCorrectAnswers: isCorrect ? 1 : 0 } },
@@ -29,6 +29,7 @@ export async function increaseAnswersCount(ctx) {
 
 export async function createUser(ctx) {
   const { userInfo, code } = ctx.request.body
+  console.log(code, '---', userInfo)
   const baseUrl = 'https://api.weixin.qq.com/sns/jscode2session'
   const appid = process.env.APPID
   const secret = process.env.SECRET
