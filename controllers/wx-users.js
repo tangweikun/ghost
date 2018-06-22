@@ -1,17 +1,26 @@
 import superagent from 'superagent'
 import WXUsersModel from '../models/wx-users'
 
-// export async function findTyping(ctx) {
-//   await WXUsersModel.find()
-//     .limit(100)
-//     .exec((err, result) => {
-//       if (err) {
-//         console.log(err)
-//       } else {
-//         ctx.body = result
-//       }
-//     })
-// }
+export async function getUserInfo(ctx) {
+  const { openid } = ctx.body
+  await WXUsersModel.findOne({ openid }).exec((err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      ctx.body = result
+    }
+  })
+}
+
+export async function increaseAnswersCount(ctx) {
+  // const openid = 'osIEm0dHDbWYVr-AmTSm1qq2s2FA'
+  const { openid, isCorrect } = ctx.body
+  await WXUsersModel.findOneAndUpdate(
+    { openid },
+    { $inc: { totalOfAnswers: 1, totalOfCorrectAnswers: isCorrect ? 1 : 0 } },
+  )
+  ctx.body = {}
+}
 
 export async function createUser(ctx) {
   const { userInfo, code } = ctx.request.body

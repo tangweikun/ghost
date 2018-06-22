@@ -10,6 +10,8 @@ import {
   findTyping,
   insertTyping,
   createUser,
+  increaseAnswersCount,
+  getUserInfo,
 } from './controllers'
 
 const router = new Router()
@@ -24,4 +26,6 @@ router
   .get('/typing', findTyping)
   .post('typing', insertTyping)
   .post('/createUser', createUser)
+  .post('/getUserInfo', getUserInfo)
+  .post('/increaseAnswersCount', increaseAnswersCount)
 export default router
