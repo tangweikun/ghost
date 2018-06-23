@@ -6,9 +6,10 @@ export async function getUserInfo(ctx) {
 
   const result = await WXUsersModel.findOne({ openid })
 
-  const ranking = await WXUsersModel.find({
-    totalOfCorrectAnswers: { $gt: result.totalOfCorrectAnswers },
-  }).count()
+  const ranking =
+    (await WXUsersModel.find({
+      totalOfCorrectAnswers: { $gt: result.totalOfCorrectAnswers },
+    }).count()) + 1
 
   ctx.body = {
     totalOfAnswers: result.totalOfAnswers,
