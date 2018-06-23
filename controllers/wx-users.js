@@ -3,13 +3,19 @@ import WXUsersModel from '../models/wx-users'
 
 export async function getUserInfo(ctx) {
   const { openid } = ctx.request.body
-  await WXUsersModel.findOne({ openid }).exec((err, result) => {
-    if (err) {
-      console.log(err)
-    } else {
-      ctx.body = result
-    }
-  })
+
+  const result = await WXUsersModel.findOne({ openid })
+
+  const ranking = await WXUsersModel.find({
+    totalOfCorrectAnswers: { $gt: result.totalOfCorrectAnswers },
+  }).count()
+
+  ctx.body = {
+    totalOfAnswers: result.totalOfAnswers,
+    totalOfCorrectAnswers: result.totalOfCorrectAnswers,
+    ranking,
+    userInfo: result.userInfo,
+  }
 }
 
 export async function increaseAnswersCount(ctx) {
@@ -25,6 +31,19 @@ export async function increaseAnswersCount(ctx) {
       ctx.body = result
     }
   })
+}
+
+export async function updateUserInfo(ctx) {
+  const { openid, userInfo } = ctx.request.body
+  await WXUsersModel.findOneAndUpdate({ openid }, { $set: { userInfo } }).exec(
+    (err, result) => {
+      if (err) {
+        console.log(err)
+      } else {
+        ctx.body = result
+      }
+    },
+  )
 }
 
 export async function createUser(ctx) {
