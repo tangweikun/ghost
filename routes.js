@@ -13,6 +13,7 @@ import {
   increaseAnswersCount,
   getUserInfo,
   updateUserInfo,
+  addChallenge,
 } from './controllers'
 
 const router = new Router()
@@ -30,4 +31,5 @@ router
   .post('/getUserInfo', getUserInfo)
   .post('/increaseAnswersCount', increaseAnswersCount)
   .post('/updateUserInfo', updateUserInfo)
+  .post('/addChallenge', addChallenge)
 export default router
