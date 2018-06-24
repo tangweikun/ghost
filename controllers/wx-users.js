@@ -1,10 +1,22 @@
 import superagent from 'superagent'
 import WXUsersModel from '../models/wx-users'
+import ChallengeModal from '../models/24-challenge'
 
 export async function getUserInfo(ctx) {
   const { openid } = ctx.request.body
 
   const result = await WXUsersModel.findOne({ openid })
+  const challenges = await ChallengeModal.find({ openid }).sort({ record: -1 })
+  let bestRecord = '-'
+  let challengeRanking = '-'
+
+  if (challenges.length > 0) {
+    bestRecord = challenges[0].record
+    const foo = await ChallengeModal.find({
+      record: { $gt: bestRecord },
+    }).count()
+    challengeRanking = foo + 1
+  }
 
   const ranking = await WXUsersModel.find({
     totalOfCorrectAnswers: { $gt: result.totalOfCorrectAnswers },
@@ -15,6 +27,8 @@ export async function getUserInfo(ctx) {
     totalOfCorrectAnswers: result.totalOfCorrectAnswers,
     ranking: ranking + 1,
     userInfo: result.userInfo,
+    challengeRanking,
+    bestRecord,
   }
 }
 
