@@ -18,14 +18,8 @@ export async function getUserInfo(ctx) {
     challengeRanking = foo + 1
   }
 
-  const ranking = await WXUsersModel.find({
-    totalOfCorrectAnswers: { $gt: result.totalOfCorrectAnswers },
-  }).count()
-
   ctx.body = {
-    totalOfAnswers: result.totalOfAnswers,
     totalOfCorrectAnswers: result.totalOfCorrectAnswers,
-    ranking: ranking + 1,
     userInfo: result.userInfo,
     challengeRanking,
     bestRecord,
