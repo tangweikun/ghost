@@ -19,6 +19,7 @@ export async function getUserInfo(ctx) {
   }
 
   ctx.body = {
+    totalOfAnswers: result.totalOfAnswers,
     totalOfCorrectAnswers: result.totalOfCorrectAnswers,
     userInfo: result.userInfo,
     challengeRanking,
