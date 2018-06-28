@@ -5,6 +5,8 @@ const Schema = mongoose.Schema
 const ChallengeSchema = new Schema({
   openid: String,
   record: Number,
+  totalTime: Number,
+  gameplay: String,
   userInfo: {
     avatarUrl: String,
     city: String,
