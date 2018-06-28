@@ -29,7 +29,7 @@ export async function getUserInfo(ctx) {
 
 export async function increaseAnswersCount(ctx) {
   const { openid, isCorrect } = ctx.request.body
-  console.log('==', openid)
+  console.log('increaseAnswersCount')
   await WXUsersModel.findOneAndUpdate(
     { openid },
     { $inc: { totalOfAnswers: 1, totalOfCorrectAnswers: isCorrect ? 1 : 0 } },
