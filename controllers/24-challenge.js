@@ -30,8 +30,8 @@ export async function getRanking(ctx) {
   const type1Record = myType1Challenges[0] ? myType1Challenges[0].record : 0
   const type2Record = myType2Challenges[0] ? myType2Challenges[0].record : 0
 
-  const type1Ranking = challenges.filter(x => x.record > type1Record).length + 1
-  const type2Ranking = challenges.filter(x => x.record > type2Record).length + 1
+  const type1Ranking = challenges.filter(x => x.record && x.gameplay === 'TYPE_1' > type1Record).length + 1
+  const type2Ranking = challenges.filter(x => x.record && x.gameplay === 'TYPE_2' > type2Record).length + 1
 
   ctx.body = {
     type1Record: type1Record || '-',
