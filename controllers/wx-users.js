@@ -56,8 +56,7 @@ export async function updateUserInfo(ctx) {
 }
 
 export async function createUser(ctx) {
-  const { userInfo, code } = ctx.request.body
-  console.log(code, '---', userInfo)
+  const { code } = ctx.request.body
   const baseUrl = 'https://api.weixin.qq.com/sns/jscode2session'
   const appid = process.env.APPID
   const secret = process.env.SECRET
@@ -65,31 +64,19 @@ export async function createUser(ctx) {
     `${baseUrl}?appid=${appid}&secret=${secret}&js_code=${code}&grant_type=authorization_code`,
   )
 
-  const { openid, session_key } = JSON.parse(res.text)
+  const { openid } = JSON.parse(res.text)
 
-  if (openid) {
-    await WXUsersModel.findOne({ openid }).exec(function(err, result) {
-      if (err) {
-        ctx.body = {}
-        console.log(err)
-      } else if (result) {
-        ctx.body = result
-      } else {
-        WXUsersModel({
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          totalOfCorrectAnswers: 0,
-          totalOfAnswers: 0,
-          userInfo,
-          openid,
-        }).save()
-        ctx.body = {
-          openid,
-          userInfo,
-          totalOfCorrectAnswers: 0,
-          totalOfAnswers: 0,
-        }
-      }
-    })
-  }
+  ctx.body = { openid }
+
+  await WXUsersModel.findOne({ openid }).exec(function(err, result) {
+    if (!result) {
+      WXUsersModel({
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        totalOfCorrectAnswers: 0,
+        totalOfAnswers: 0,
+        openid,
+      }).save()
+    }
+  })
 }
