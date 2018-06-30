@@ -66,10 +66,14 @@ export async function createUser(ctx) {
 
   const { openid } = JSON.parse(res.text)
 
-  ctx.body = { openid }
-
   await WXUsersModel.findOne({ openid }).exec(function(err, result) {
     if (!result) {
+      ctx.body = {
+        openid,
+        userInfo: null,
+        totalOfCorrectAnswers: 0,
+        totalOfAnswers: 0,
+      }
       WXUsersModel({
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -77,6 +81,8 @@ export async function createUser(ctx) {
         totalOfAnswers: 0,
         openid,
       }).save()
+    } else {
+      ctx.body = result
     }
   })
 }
