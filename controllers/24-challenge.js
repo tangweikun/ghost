@@ -18,13 +18,17 @@ export function addChallenge(ctx) {
 export async function getRanking(ctx) {
   const { openid } = ctx.request.body
   const challenges = await ChallengeModal.find()
-
   const myType1Challenges = challenges
     .filter(x => x.openid === openid && x.gameplay === 'TYPE_1')
     .sort((a, b) => b.record - a.record)
 
+  // TODO: Remove `x.gameplay === undefined`
   const myType2Challenges = challenges
-    .filter(x => x.openid === openid && x.gameplay === 'TYPE_2')
+    .filter(
+      x =>
+        x.openid === openid &&
+        (x.gameplay === 'TYPE_2' || x.gameplay === undefined),
+    )
     .sort((a, b) => b.record - a.record)
 
   const type1Record = myType1Challenges[0] ? myType1Challenges[0].record : 0
@@ -34,8 +38,11 @@ export async function getRanking(ctx) {
     challenges.filter(x => x.gameplay === 'TYPE_1' && x.record > type1Record)
       .length + 1
   const type2Ranking =
-    challenges.filter(x => x.gameplay === 'TYPE_2' && x.record > type2Record)
-      .length + 1
+    challenges.filter(
+      x =>
+        (x.gameplay === 'TYPE_2' || x.gameplay === undefined) &&
+        x.record > type2Record,
+    ).length + 1
 
   ctx.body = {
     type1Record: type1Record || '-',

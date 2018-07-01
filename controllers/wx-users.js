@@ -9,7 +9,7 @@ export async function getUserInfo(ctx) {
   const challenges = await ChallengeModal.find({ openid }).sort({ record: -1 })
   let bestRecord = '-'
   let challengeRanking = '-'
-
+  console.log(openid, result, 'getUserInfo')
   if (challenges.length > 0) {
     bestRecord = challenges[0].record
     const foo = await ChallengeModal.find({
@@ -66,23 +66,21 @@ export async function createUser(ctx) {
 
   const { openid } = JSON.parse(res.text)
 
-  await WXUsersModel.findOne({ openid }).exec(function(err, result) {
-    if (!result) {
-      ctx.body = {
-        openid,
-        userInfo: null,
-        totalOfCorrectAnswers: 0,
-        totalOfAnswers: 0,
-      }
-      WXUsersModel({
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        totalOfCorrectAnswers: 0,
-        totalOfAnswers: 0,
-        openid,
-      }).save()
-    } else {
-      ctx.body = result
-    }
-  })
+  const result = await WXUsersModel.findOne({ openid })
+  ctx.body = result || {
+    openid,
+    userInfo: null,
+    totalOfCorrectAnswers: 0,
+    totalOfAnswers: 0,
+  }
+
+  if (!result) {
+    WXUsersModel({
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      totalOfCorrectAnswers: 0,
+      totalOfAnswers: 0,
+      openid,
+    }).save()
+  }
 }
