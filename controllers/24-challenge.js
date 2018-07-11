@@ -81,7 +81,7 @@ export async function getRankingList2(ctx) {
     .sort({ record: -1 })
     .exec((err, res) => {
       if (err) {
-        // console.log(err)
+        console.log(err)
       } else {
         ctx.body = res
       }
