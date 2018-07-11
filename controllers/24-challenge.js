@@ -22,13 +22,8 @@ export async function getRanking(ctx) {
     .filter(x => x.openid === openid && x.gameplay === 'TYPE_1')
     .sort((a, b) => b.record - a.record)
 
-  // TODO: Remove `x.gameplay === undefined`
   const myType2Challenges = challenges
-    .filter(
-      x =>
-        x.openid === openid &&
-        (x.gameplay === 'TYPE_2' || x.gameplay === undefined),
-    )
+    .filter(x => x.openid === openid && x.gameplay === 'TYPE_2')
     .sort((a, b) => b.record - a.record)
 
   const type1Record = myType1Challenges[0] ? myType1Challenges[0].record : 0
@@ -38,11 +33,8 @@ export async function getRanking(ctx) {
     challenges.filter(x => x.gameplay === 'TYPE_1' && x.record > type1Record)
       .length + 1
   const type2Ranking =
-    challenges.filter(
-      x =>
-        (x.gameplay === 'TYPE_2' || x.gameplay === undefined) &&
-        x.record > type2Record,
-    ).length + 1
+    challenges.filter(x => x.gameplay === 'TYPE_2' && x.record > type2Record)
+      .length + 1
 
   ctx.body = {
     type1Record: type1Record || '-',
@@ -54,6 +46,22 @@ export async function getRanking(ctx) {
 
 export async function getRankingList(ctx) {
   await ChallengeModal.find({ record: { $gt: 0 } })
+    .sort({ record: -1 })
+    .exec((err, res) => {
+      if (err) {
+        console.log(err)
+      } else {
+        ctx.body = res
+      }
+    })
+}
+
+export async function getRankingList1(ctx) {
+  await ChallengeModal.find({
+    record: { $gt: 0 },
+    gameplay: 'TYPE_1',
+    userInfo: { $exists: 1 },
+  })
     .sort({ record: -1 })
     .exec((err, res) => {
       if (err) {

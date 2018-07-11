@@ -18,6 +18,7 @@ import {
   getRanking,
   addBattle,
   getMyBattleList,
+  getRankingList1,
 } from './controllers'
 
 const router = new Router()
@@ -40,4 +41,6 @@ router
   .post('/getRanking', getRanking)
   .post('/addBattle', addBattle)
   .post('/getMyBattleList', getMyBattleList)
+  .post('/getRankingList1', getRankingList1)
+
 export default router
