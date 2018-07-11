@@ -19,6 +19,7 @@ import {
   addBattle,
   getMyBattleList,
   getRankingList1,
+  getRankingList2,
 } from './controllers'
 
 const router = new Router()
@@ -42,5 +43,6 @@ router
   .post('/addBattle', addBattle)
   .post('/getMyBattleList', getMyBattleList)
   .post('/getRankingList1', getRankingList1)
+  .post('/getRankingList2', getRankingList2)
 
 export default router
