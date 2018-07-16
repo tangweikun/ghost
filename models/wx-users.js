@@ -5,6 +5,7 @@ const Schema = mongoose.Schema
 const WXAddUsersSchema = new Schema({
   openid: String,
   totalOfAnswers: Number,
+  rank: Number,
   totalOfCorrectAnswers: Number,
   userInfo: {
     avatarUrl: String,

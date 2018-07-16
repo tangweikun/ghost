@@ -6,24 +6,23 @@ export async function getUserInfo(ctx) {
   const { openid } = ctx.request.body
 
   const result = await WXUsersModel.findOne({ openid })
-  const challenges = await ChallengeModal.find({ openid }).sort({ record: -1 })
-  let bestRecord = '-'
-  let challengeRanking = '-'
-  console.log(openid, result, 'getUserInfo')
-  if (challenges.length > 0) {
-    bestRecord = challenges[0].record
-    const foo = await ChallengeModal.find({
-      record: { $gt: bestRecord },
-    }).count()
-    challengeRanking = foo + 1
-  }
+
+  const totalRank = await WXUsersModel.aggregate([
+    {
+      $match: {
+        totalOfCorrectAnswers: { $gt: result.totalOfCorrectAnswers },
+      },
+    },
+    { $count: 'rank' },
+  ])
+
+  const rank = totalRank[0] ? totalRank[0].rank + 1 : 1
 
   ctx.body = {
     totalOfAnswers: result.totalOfAnswers,
     totalOfCorrectAnswers: result.totalOfCorrectAnswers,
     userInfo: result.userInfo,
-    challengeRanking,
-    bestRecord,
+    rank,
   }
 }
 
