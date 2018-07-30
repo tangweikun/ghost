@@ -58,7 +58,7 @@ export async function getRankingList(ctx) {
 
 export async function getRankingList1(ctx) {
   await ChallengeModal.find({
-    record: { $gt: 0 },
+    record: { $gt: 1 },
     gameplay: 'TYPE_1',
     // userInfo: { $exists: 1 },
   })
@@ -74,7 +74,7 @@ export async function getRankingList1(ctx) {
 
 export async function getRankingList2(ctx) {
   await ChallengeModal.find({
-    record: { $gt: 2 },
+    record: { $gt: 4 },
     gameplay: 'TYPE_2',
     // userInfo: { $exists: 1 },
   })
