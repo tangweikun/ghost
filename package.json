@@ -18,7 +18,7 @@
     "koa-cors": "0.0.16",
     "koa-router": "^7.2.1",
     "mongodb": "^2.2.30",
-    "mongoose": "^4.11.3",
+    "mongoose": "^4.13.17",
     "superagent": "^3.8.3"
   },
   "devDependencies": {
