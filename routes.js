@@ -1,4 +1,4 @@
-import Router from 'koa-router'
+import Router from 'koa-router';
 
 import {
   findProperty,
@@ -21,9 +21,11 @@ import {
   getRankingList1,
   getRankingList2,
   addQuestion,
-} from './controllers'
+  getRanking1,
+  getRanking2,
+} from './controllers';
 
-const router = new Router()
+const router = new Router();
 
 router
   .get('/property', findProperty)
@@ -46,5 +48,7 @@ router
   .post('/getRankingList1', getRankingList1)
   .post('/getRankingList2', getRankingList2)
   .post('/addQuestion', addQuestion)
+  .get('/getRanking1', getRanking1)
+  .get('/getRanking2', getRanking2);
 
-export default router
+export default router;
