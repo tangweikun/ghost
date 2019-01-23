@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const TodoListSchema = new Schema({
   createdAt: Date,
@@ -8,8 +8,8 @@ const TodoListSchema = new Schema({
   task: String,
   isDeleted: Boolean,
   isCompleted: Boolean,
-})
+});
 
-const TodoListModel = mongoose.model('todoLists', TodoListSchema)
+const TodoListModel = mongoose.model('todoLists', TodoListSchema);
 
-export default TodoListModel
+export default TodoListModel;
