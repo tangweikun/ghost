@@ -14,7 +14,7 @@
     "eventproxy": "^1.0.0",
     "express": "^4.16.3",
     "koa": "^2.3.0",
-    "koa-body": "^2.3.0",
+    "koa-body": "^3.0.0",
     "koa-cors": "0.0.16",
     "koa-router": "^7.2.1",
     "mongodb": "^2.2.30",
