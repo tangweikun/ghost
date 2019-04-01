@@ -1,5 +1,6 @@
 import Router from 'koa-router';
 import { addQuestionPro } from './24-points/controllers/questions';
+import { addChallengePro } from './24-points/controllers/challenges';
 
 import {
   findProperty,
@@ -30,6 +31,7 @@ const router = new Router();
 
 router
   .post('24-points/add_question', addQuestionPro)
+  .post('24-points/add_challenge', addChallengePro)
   .get('/property', findProperty)
   .post('/property', insertProperty)
   .post('/task', insertTask)
