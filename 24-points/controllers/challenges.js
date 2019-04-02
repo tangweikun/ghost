@@ -1,4 +1,4 @@
-import ChallengeModel from '../models/challenge';
+import ChallengeModel from '../models/challenges';
 
 export function addChallengePro(ctx) {
   const {

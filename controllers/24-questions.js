@@ -1,4 +1,4 @@
-import QuestionsModel from '../models/24-questions';
+import QuestionsModel from '../24-points/models/questions';
 
 export function addQuestion(ctx) {
   const { openid, question, isCorrect, gameplay } = ctx.request.body;

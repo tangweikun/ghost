@@ -1,4 +1,4 @@
-import ChallengeModal from '../models/24-challenge';
+import ChallengeModal from '../24-points/models/challenges';
 
 export function addChallenge(ctx) {
   const { userInfo, openid, record, gameplay, totalTime } = ctx.request.body;
