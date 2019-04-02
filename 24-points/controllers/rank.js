@@ -38,7 +38,7 @@ export async function getRank(ctx) {
   await RankModel.find({
     gameplay: decodeURIComponent(gameplay),
   })
-    .sort({ rank: -1 })
+    .sort({ rank: 1 })
     .exec((err, res) => {
       if (err) {
         console.log(err);
