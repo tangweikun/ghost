@@ -1,9 +1,9 @@
-import ChallengeModal from '../24-points/models/challenges';
+import ChallengeModel from '../24-points/models/challenges';
 
 export function addChallenge(ctx) {
   const { userInfo, openid, record, gameplay, totalTime } = ctx.request.body;
   // console.log('addChallenge->gameplay', gameplay)
-  ChallengeModal({
+  ChallengeModel({
     createdAt: new Date(),
     openid,
     record,
@@ -17,7 +17,7 @@ export function addChallenge(ctx) {
 
 export async function getRanking(ctx) {
   const { openid } = ctx.request.body;
-  const challenges = await ChallengeModal.find();
+  const challenges = await ChallengeModel.find();
   const myType1Challenges = challenges
     .filter(x => x.openid === openid && x.gameplay === 'TYPE_1')
     .sort((a, b) => b.record - a.record);
@@ -45,7 +45,7 @@ export async function getRanking(ctx) {
 }
 
 export async function getRankingList(ctx) {
-  await ChallengeModal.find({ record: { $gt: 0 } })
+  await ChallengeModel.find({ record: { $gt: 0 } })
     .sort({ record: -1 })
     .exec((err, res) => {
       if (err) {
@@ -57,7 +57,7 @@ export async function getRankingList(ctx) {
 }
 
 export async function getRankingList1(ctx) {
-  await ChallengeModal.find({
+  await ChallengeModel.find({
     record: { $gt: 8 },
     gameplay: 'TYPE_1',
     // userInfo: { $exists: 1 },
@@ -74,7 +74,7 @@ export async function getRankingList1(ctx) {
 
 // TODO: 只返回需要的数据
 export async function getRanking1(ctx) {
-  await ChallengeModal.find({
+  await ChallengeModel.find({
     gameplay: 'TYPE_1',
     userInfo: { $exists: 1 },
   })
@@ -91,7 +91,7 @@ export async function getRanking1(ctx) {
 
 // TODO: 只返回需要的数据
 export async function getRanking2(ctx) {
-  await ChallengeModal.find({
+  await ChallengeModel.find({
     gameplay: 'TYPE_2',
     userInfo: { $exists: 1 },
   })
@@ -107,7 +107,7 @@ export async function getRanking2(ctx) {
 }
 
 export async function getRankingList2(ctx) {
-  await ChallengeModal.find({
+  await ChallengeModel.find({
     record: { $gt: 8 },
     gameplay: 'TYPE_2',
     // userInfo: { $exists: 1 },

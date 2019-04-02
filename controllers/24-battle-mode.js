@@ -1,4 +1,4 @@
-import BattleModeModal from '../24-points/models/battles';
+import BattleModeModel from '../24-points/models/battles';
 
 export function addBattle(ctx) {
   const {
@@ -10,7 +10,7 @@ export function addBattle(ctx) {
     rivalUserInfo,
   } = ctx.request.body;
 
-  BattleModeModal({
+  BattleModeModel({
     createdAt: new Date(),
     openid,
     myScore,
@@ -25,7 +25,7 @@ export function addBattle(ctx) {
 
 export async function getMyBattleList(ctx) {
   const { openid } = ctx.request.body;
-  await BattleModeModal.find({ openid })
+  await BattleModeModel.find({ openid })
     .sort({ createdAt: -1 })
     .exec((err, res) => {
       if (err) {
