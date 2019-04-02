@@ -19,7 +19,7 @@
     "koa-router": "^7.2.1",
     "lodash": "^4.17.11",
     "mongodb": "^2.2.30",
-    "mongoose": "^4.11.3",
+    "mongoose": "^4.13.17",
     "superagent": "^3.8.3"
   },
   "devDependencies": {
