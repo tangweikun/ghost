@@ -2,7 +2,7 @@ import Router from 'koa-router';
 import { addQuestionPro } from './24-points/controllers/questions';
 import { addChallengePro } from './24-points/controllers/challenges';
 import { addBattlePro } from './24-points/controllers/battles';
-import { updateRank } from './24-points/controllers/rank';
+import { updateRank, getRank } from './24-points/controllers/rank';
 
 import {
   findProperty,
@@ -33,6 +33,7 @@ const router = new Router();
 
 router
   .get('/24-points/update_rank', updateRank)
+  .get('/24-points/get_rank', getRank)
   .post('/24-points/add_question', addQuestionPro)
   .post('/24-points/add_challenge', addChallengePro)
   .post('/24-points/add_battle', addBattlePro)
