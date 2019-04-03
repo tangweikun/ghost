@@ -1,6 +1,6 @@
 import ChallengeModel from '../models/challenges';
 
-export function addChallengePro(ctx) {
+export function addChallenge(ctx) {
   const {
     userInfo = {},
     openid,
