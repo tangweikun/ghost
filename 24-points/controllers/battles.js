@@ -1,6 +1,6 @@
 import BattleModeModel from '../models/battles';
 
-export function addBattlePro(ctx) {
+export function addBattle(ctx) {
   const {
     userInfo,
     openid,

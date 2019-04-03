@@ -1,7 +1,7 @@
 import Router from 'koa-router';
 import { addQuestionPro } from './24-points/controllers/questions';
 import { addChallengePro } from './24-points/controllers/challenges';
-import { addBattlePro } from './24-points/controllers/battles';
+import { addBattle } from './24-points/controllers/battles';
 import { updateRank, getRank } from './24-points/controllers/rank';
 
 import {
@@ -20,7 +20,6 @@ import {
   addChallenge,
   getRankingList,
   getRanking,
-  addBattle,
   getMyBattleList,
   getRankingList1,
   getRankingList2,
@@ -36,7 +35,7 @@ router
   .get('/24-points/get_rank', getRank)
   .post('/24-points/add_question', addQuestionPro)
   .post('/24-points/add_challenge', addChallengePro)
-  .post('/24-points/add_battle', addBattlePro)
+  .post('/24-points/add_battle', addBattle)
   .get('/property', findProperty)
   .post('/property', insertProperty)
   .post('/task', insertTask)
@@ -52,7 +51,6 @@ router
   .post('/addChallenge', addChallenge)
   .post('/getRankingList', getRankingList)
   .post('/getRanking', getRanking)
-  .post('/addBattle', addBattle)
   .post('/getMyBattleList', getMyBattleList)
   .post('/getRankingList1', getRankingList1)
   .post('/getRankingList2', getRankingList2)
