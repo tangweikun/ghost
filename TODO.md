@@ -4,6 +4,6 @@
 - [ ] 参数为对象的文档怎么写
 - [ ] 参数校验
 - [ ] 压缩代码
+- [ ] decodeURIComponent
 - [ ] Model 的引用
 - [ ] 错误处理
-- [ ] decodeURIComponent
