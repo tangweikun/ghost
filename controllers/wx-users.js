@@ -2,27 +2,33 @@ import superagent from 'superagent';
 import WXUsersModel from '../models/wx-users';
 
 export async function getUserInfo(ctx) {
-  const { openid } = ctx.request.body;
-
-  const result = await WXUsersModel.findOne({ openid });
-
-  const totalRank = await WXUsersModel.aggregate([
-    {
-      $match: {
-        totalOfCorrectAnswers: { $gt: result.totalOfCorrectAnswers },
-      },
-    },
-    { $count: 'rank' },
-  ]);
-
-  const rank = totalRank[0] ? totalRank[0].rank + 1 : 1;
-
   ctx.body = {
-    totalOfAnswers: result.totalOfAnswers,
-    totalOfCorrectAnswers: result.totalOfCorrectAnswers,
-    userInfo: result.userInfo,
-    rank,
+    totalOfAnswers: '-',
+    totalOfCorrectAnswers: '-',
+    userInfo: {},
+    rank: '-',
   };
+  // const { openid } = ctx.request.body;
+
+  // const result = await WXUsersModel.findOne({ openid });
+
+  // const totalRank = await WXUsersModel.aggregate([
+  //   {
+  //     $match: {
+  //       totalOfCorrectAnswers: { $gt: result.totalOfCorrectAnswers },
+  //     },
+  //   },
+  //   { $count: 'rank' },
+  // ]);
+
+  // const rank = totalRank[0] ? totalRank[0].rank + 1 : 1;
+
+  // ctx.body = {
+  //   totalOfAnswers: result.totalOfAnswers,
+  //   totalOfCorrectAnswers: result.totalOfCorrectAnswers,
+  //   userInfo: result.userInfo,
+  //   rank,
+  // };
 }
 
 export async function increaseAnswersCount(ctx) {
