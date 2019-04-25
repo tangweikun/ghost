@@ -1,6 +1,6 @@
-import QuestionsModel from '../models/questions';
+const QuestionsModel = require('../models/questions');
 
-export function addQuestionPro(ctx) {
+function addQuestionPro(ctx) {
   const { openid, question, isCorrect, gameplay } = ctx.request.body;
 
   QuestionsModel({
@@ -11,5 +11,7 @@ export function addQuestionPro(ctx) {
     gameplay,
   }).save();
 
-  ctx.body = {};
+  return {};
 }
+
+module.exports = { addQuestionPro };

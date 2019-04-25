@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
@@ -30,4 +30,4 @@ const BattleModeSchema = new Schema({
 
 const BattleModeModel = mongoose.model('24-battle-mode', BattleModeSchema);
 
-export default BattleModeModel;
+module.exports = BattleModeModel;

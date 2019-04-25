@@ -7,3 +7,4 @@
 - [ ] 错误处理
 - [ ] decodeURIComponent
 - [ ] Model 的引用
+- [ ] DeprecationWarning: Mongoose: `findOneAndUpdate()` and `findOneAndDelete()` without the `useFindAndModify` option set to false are deprecated. See: https://mongoosejs.com/docs/deprecations.html#-findandmodify

@@ -1,6 +1,6 @@
-import ChallengeModel from '../models/challenges';
+const ChallengeModel = require('../models/challenges');
 
-export function addChallengePro(ctx) {
+function addChallengePro(ctx) {
   const {
     userInfo = {},
     openid,
@@ -18,5 +18,7 @@ export function addChallengePro(ctx) {
     totalTime,
   }).save();
 
-  ctx.body = {};
+  return {};
 }
+
+module.exports = { addChallengePro };

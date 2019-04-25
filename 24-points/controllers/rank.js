@@ -1,8 +1,8 @@
-import RankModel from '../models/rank';
-import ChallengeModel from '../models/challenges';
-import { filterTopRank } from '../utils/filterTopRank';
+const RankModel = require('../models/rank');
+const ChallengeModel = require('../models/challenges');
+const { filterTopRank } = require('../utils/filterTopRank');
 
-export async function updateRank(ctx) {
+async function updateRank(ctx) {
   let filteredRank = [];
   const { gameplay = 'TYPE_1' } = ctx.request.query;
 
@@ -29,21 +29,17 @@ export async function updateRank(ctx) {
     );
   }
 
-  ctx.body = {};
+  return {};
 }
 
-export async function getRank(ctx) {
+async function getRank(ctx) {
   const { gameplay = 'TYPE_1' } = ctx.request.query;
 
-  await RankModel.find({
+  return await RankModel.find({
     gameplay: decodeURIComponent(gameplay),
   })
     .sort({ rank: 1 })
-    .exec((err, res) => {
-      if (err) {
-        console.log(err);
-      } else {
-        ctx.body = res;
-      }
-    });
+    .exec();
 }
+
+module.exports = { updateRank, getRank };

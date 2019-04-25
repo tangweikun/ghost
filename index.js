@@ -1,22 +1,25 @@
-import Koa from 'koa'
-import koaBody from 'koa-body'
-import mongoose from 'mongoose'
-import cors from 'koa-cors'
-import router from './routes'
+const Koa = require('koa');
+const koaBody = require('koa-body');
+const mongoose = require('mongoose');
+const cors = require('koa-cors');
+const router = require('./routes');
 
-require('dotenv').config()
+require('dotenv').config();
 
-mongoose.connect(
-  process.env.MONGO_URL,
-  { useMongoClient: true },
-)
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+});
 
-const app = new Koa()
+const app = new Koa();
 
-app.use(koaBody())
-app.use(cors())
-app.use(router.routes())
-// .use(router.allowedMethods())
+// app.use(ctx => {
+//   ctx.body = 'Hello Koa';
+// });
 
-app.listen(4000)
-console.log('[demo] start-quick is starting at port 4000')
+app.use(koaBody());
+app.use(cors());
+app.use(router.routes()).use(router.allowedMethods());
+
+app.listen(4000);
+console.log('[demo] start-quick is starting at port 4000');

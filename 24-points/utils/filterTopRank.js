@@ -1,7 +1,7 @@
-import isEmpty from 'lodash/isEmpty';
-import pick from 'lodash/pick';
+const isEmpty = require('lodash/isEmpty');
+const pick = require('lodash/pick');
 
-export const filterTopRank = (list, top = 100) => {
+const filterTopRank = (list, top = 100) => {
   const res = [];
   const helper = [];
 
@@ -18,3 +18,5 @@ export const filterTopRank = (list, top = 100) => {
   }
   return res;
 };
+
+module.exports = { filterTopRank };

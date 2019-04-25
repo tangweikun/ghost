@@ -1,6 +1,6 @@
-import BattleModeModel from '../models/battles';
+const BattleModeModel = require('../models/battles');
 
-export function addBattle(ctx) {
+function addBattle(ctx) {
   const {
     userInfo,
     openid,
@@ -20,5 +20,14 @@ export function addBattle(ctx) {
     rivalUserInfo,
   }).save();
 
-  ctx.body = {};
+  return {};
 }
+
+async function getMyBattleList(ctx) {
+  const { openid } = ctx.request.body;
+  return await BattleModeModel.find({ openid })
+    .sort({ createdAt: -1 })
+    .exec();
+}
+
+module.exports = { addBattle, getMyBattleList };

@@ -1,20 +1,20 @@
-import TypingModel from '../models/typing'
+const TypingModel = require('../models/typing');
 
-export async function findTyping(ctx) {
-  await TypingModel.find()
+async function findTyping(ctx) {
+  let res = null;
+  const foo = await TypingModel.find()
     .sort({ createdAt: -1 })
     .limit(100)
-    .exec((err, result) => {
-      if (err) {
-        console.log(err)
-      } else {
-        ctx.body = result
-      }
-    })
+    .exec();
+  console.log(res, '===');
+  return foo;
+  // return res;
 }
 
-export function insertTyping(ctx) {
-  const { startAt, endAt, wpm } = ctx.request.body
-  TypingModel({ startAt, endAt, wpm, createdAt: new Date() }).save()
-  ctx.body = `Request Body: ${JSON.stringify(ctx.request.body)}`
+function insertTyping(ctx) {
+  const { startAt, endAt, wpm } = ctx.request.body;
+  TypingModel({ startAt, endAt, wpm, createdAt: new Date() }).save();
+  ctx.body = `Request Body: ${JSON.stringify(ctx.request.body)}`;
 }
+
+module.exports = { findTyping, insertTyping };

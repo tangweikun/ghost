@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const WXAddUsersSchema = new Schema({
   openid: String,
@@ -18,8 +18,8 @@ const WXAddUsersSchema = new Schema({
   },
   createdAt: Date,
   updatedAt: Date,
-})
+});
 
-const WXUsersModel = mongoose.model('wx-users', WXAddUsersSchema)
+const WXUsersModel = mongoose.model('wx-users', WXAddUsersSchema);
 
-export default WXUsersModel
+module.exports = WXUsersModel;

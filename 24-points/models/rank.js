@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 const RankSchema = new Schema({
@@ -18,4 +18,4 @@ const RankSchema = new Schema({
 });
 
 const RankModel = mongoose.model('24-rank', RankSchema);
-export default RankModel;
+module.exports = RankModel;

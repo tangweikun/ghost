@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
@@ -21,4 +21,4 @@ const ChallengeSchema = new Schema({
 
 const ChallengeModel = mongoose.model('24-challenges', ChallengeSchema);
 
-export default ChallengeModel;
+module.exports = ChallengeModel;
