@@ -21,5 +21,5 @@ app.use(koaBody());
 app.use(cors());
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(4000);
+app.listen(process.env.PORT || 4000);
 console.log('[demo] start-quick is starting at port 4000');

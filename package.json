@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "babel-node index.js --presets es2015",
+    "start": "node index.js --presets es2015",
     "lint": "eslint . --ext .js"
   },
   "dependencies": {
